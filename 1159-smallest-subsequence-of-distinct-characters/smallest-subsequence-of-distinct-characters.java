@@ -7,19 +7,25 @@ class Solution {
             char ch = s.charAt(i);
             lastIdx[ch - 'a'] = i;
         }
-        StringBuffer str = new StringBuffer();
+        Stack<Character> st = new Stack<>();
         for(int i=0; i<n; i++){
             char ch = s.charAt(i);
             int idx = ch-'a';
             if(visited[idx])
                 continue;
-            while(str.length()>0 && str.charAt(str.length()-1) > ch && lastIdx[str.charAt(str.length()-1) - 'a'] > i){
-                visited[str.charAt(str.length()-1)-'a'] = false;
-                str.deleteCharAt(str.length()-1);
+            while(!st.isEmpty()){
+                if(st.peek() < ch)  break;
+                if(lastIdx[st.peek()-'a'] < i)  break;
+                char top = st.pop();
+                visited[top-'a'] = false;
             }
-            str.append(ch);
-            visited[ch-'a'] = true;
+            st.push(ch);
+            visited[idx] = true;
         }
-        return str.toString();
+        StringBuffer res = new StringBuffer();
+        for(char ch: st){
+            res.append(ch);
+        }
+        return res.toString();
     }
 }
