@@ -1,36 +1,21 @@
 class Solution {
     public String smallestPalindrome(String s) {
         int n = s.length();
-        if(n <= 1)
-            return s;
-        Map<Character, Integer> map = new TreeMap<>();
-
-        for(int i=0; i<n; i++){
-            char ch = s.charAt(i);
-            map.put(ch, map.getOrDefault(ch, 0)+1);
+        int mid = n/2;
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<mid; i++){
+            sb.append(s.charAt(i));
         }
-        char[] arr = new char[n];
-        int i=0;
-        for(Map.Entry<Character, Integer> entry: map.entrySet()){
-            if(entry.getValue() % 2 == 0){
-                for(int j=0; j<entry.getValue()/2; j++){
-                    arr[i] = entry.getKey();
-                    arr[n-1-i] = entry.getKey();
-                    i++;
-                }
-            }
-            else if(entry.getValue() % 2 != 0){
-                if(entry.getValue() > 1){
-                    for(int j=0; j<entry.getValue()/2; j++){
-                        arr[i] = entry.getKey();
-                        arr[n-1-i] = entry.getKey();
-                        i++;
-                    }
-                }
-                arr[n/2] = entry.getKey();
-            }
+        char[] ch = sb.toString().toCharArray();
+        Arrays.sort(ch);
+        sb.setLength(0);
+        sb.append(ch);
+        if(n%2 != 0){
+            sb.append(s.charAt(mid));
         }
-        String str = new String(arr);
-        return str;
+        for(int i=mid-1; i>=0; i--){
+            sb.append(sb.charAt(i));
+        }
+        return sb.toString();
     }
 }
