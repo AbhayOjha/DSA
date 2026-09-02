@@ -1,20 +1,24 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        StringBuffer str = new StringBuffer();
-        for(char ch : s.toCharArray()){
-            if(ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9'){
-                str.append(ch);
-            }
+        if (s.isEmpty()) {
+        	return true;
         }
-        s = str.toString().toLowerCase();
-        int i=0;
-        int j=s.length()-1;
-        while(i<j){
-            if(s.charAt(i) != s.charAt(j)){
-                return false;
-            }
-            i++;
-            j--;
+        int start = 0;
+        int last = s.length() - 1;
+        while(start <= last) {
+        	char currFirst = s.charAt(start);
+        	char currLast = s.charAt(last);
+        	if (!Character.isLetterOrDigit(currFirst )) {
+        		start++;
+        	} else if(!Character.isLetterOrDigit(currLast)) {
+        		last--;
+        	} else {
+        		if (Character.toLowerCase(currFirst) != Character.toLowerCase(currLast)) {
+        			return false;
+        		}
+        		start++;
+        		last--;
+        	}
         }
         return true;
     }
