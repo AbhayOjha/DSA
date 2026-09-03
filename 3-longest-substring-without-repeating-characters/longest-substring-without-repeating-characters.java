@@ -3,7 +3,7 @@ class Solution {
         int longest = 0;
         int left = 0;
         int n = s.length();
-        HashSet<Character> set = new HashSet<>();
+        Set<Character> set = new HashSet<>();
         for(int right = 0; right<n; right++){
             if(!set.contains(s.charAt(right))){
                 set.add(s.charAt(right));
