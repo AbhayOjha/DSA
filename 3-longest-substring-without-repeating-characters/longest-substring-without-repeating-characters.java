@@ -2,8 +2,9 @@ class Solution {
     public int lengthOfLongestSubstring(String s) {
         int longest = 0;
         int left = 0;
+        int n = s.length();
         HashSet<Character> set = new HashSet<>();
-        for(int right = 0; right<s.length(); right++){
+        for(int right = 0; right<n; right++){
             if(!set.contains(s.charAt(right))){
                 set.add(s.charAt(right));
                 longest = Math.max(longest, right-left+1);
