@@ -11,8 +11,8 @@ class Solution {
                 maxProd = minProd;
                 minProd = temp;
             }
-            maxProd = Math.max(cur, maxProd * cur);
-            minProd = Math.min(cur, minProd * cur);
+            maxProd = Math.max(cur, cur * maxProd);
+            minProd = Math.min(cur, cur * minProd);
             result = Math.max(result, maxProd);
         }
         return result;
